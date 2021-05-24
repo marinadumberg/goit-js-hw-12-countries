@@ -24,7 +24,7 @@ import { debounce } from "lodash";
 	    apiServise.fetchCountries().then(data => {
 	    
 	        if (data.length > 10) {
-	            PNotify.error({
+	            PNotify.notice({
 	          text: 'Too many matches found. Please enter a more spesific query!',
 	        })
 	      
@@ -34,7 +34,11 @@ import { debounce } from "lodash";
 	         else{countryMarup(data)}
 	        
 	        
-	    })
+        }).catch(error => {
+            PNotify.error({
+                text:'Please,enter country name',
+            })
+        })
 	
 
     }
