@@ -15,9 +15,9 @@ export default class ApiServise{
                       return response.json();
                   }
                   
-        //               PNotify.notice({
-        //   text: 'Too many matches found. Please enter a more specific query!',
-        // })
+                      PNotify.notice({
+          text: 'Too many matches found. Please enter a more specific query!',
+        })
               }       
         )        
     }
