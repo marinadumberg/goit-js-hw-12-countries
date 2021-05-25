@@ -1,5 +1,8 @@
 import PNotify from '../../node_modules/@pnotify/core/dist/PNotify'
+
+
 export default class ApiServise{
+
     constructor() {
         this.searchQuery = '';
      }
@@ -12,9 +15,9 @@ export default class ApiServise{
                       return response.json();
                   }
                   
-                      PNotify.notice({
-          text: 'Too many matches found. Please enter a more specific query!',
-        })
+        //               PNotify.notice({
+        //   text: 'Too many matches found. Please enter a more specific query!',
+        // })
               }       
         )        
     }

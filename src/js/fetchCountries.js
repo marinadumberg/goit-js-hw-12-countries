@@ -4,7 +4,10 @@ import countryCardTemplate from '../templates/country-card.hbs';
 import ApiServise from '../js/fetchCountries-api';
 import { debounce } from "lodash";
     import PNotify from '../../node_modules/@pnotify/core/dist/PNotify'
-	
+
+import { alert, notice, info, success, error } from '@pnotify/core';
+import '@pnotify/core/dist/BrightTheme.css';
+import '@pnotify/core/dist/PNotify.css';
 
 	const refs = {
 	    input: document.querySelector('input'),
@@ -20,18 +23,29 @@ import { debounce } from "lodash";
 	
 	    clearCardList();
 	
-	    apiServise.query = e.target.value;
-	    apiServise.fetchCountries().then(data => {
-	    
-	        if (data.length > 10) {
-	            PNotify.notice({
-	          text: 'Too many matches found. Please enter a more spesific query!',
-	        })
+        apiServise.query = e.target.value;
+        console.log(apiServise)
+        
+        if (apiServise.query.trim() === '') {
+            return;
+        }
+
+        apiServise.fetchCountries().then(data => {
+            
+                
+            if (data.length > 10) {
+                error('Too many matches found. Please enter a more spesific query!');
+	        //     PNotify.notice({
+	        //   text: 'Too many matches found. Please enter a more spesific query!',
+	        // })
 	      
 	        }else if (data.length > 1) {
 	           countriesMarup(data) 
 	        }
-	         else{countryMarup(data)}
+            else {
+                countryMarup(data)
+            }
+
 	        
 	        
         }).catch(error => {
@@ -42,6 +56,7 @@ import { debounce } from "lodash";
 	
 
     }
+    
     
 	function countriesMarup(items) {
 	    refs.countriesList.insertAdjacentHTML
